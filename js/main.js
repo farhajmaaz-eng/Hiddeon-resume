@@ -19,12 +19,14 @@
   const nav = $('#siteNav');
   const closeMenu = () => {
     nav.classList.remove('open');
+    header.classList.remove('menu-open');
     hamburger.setAttribute('aria-expanded', 'false');
     hamburger.setAttribute('aria-label', 'Open menu');
     document.body.style.overflow = '';
   };
   hamburger.addEventListener('click', () => {
     const open = nav.classList.toggle('open');
+    header.classList.toggle('menu-open', open);
     hamburger.setAttribute('aria-expanded', String(open));
     hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     document.body.style.overflow = open ? 'hidden' : '';

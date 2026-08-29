@@ -78,6 +78,8 @@ main{position:relative;z-index:1}
 /* ---------- Header ---------- */
 .site-header{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid transparent;transition:background .35s var(--ease),border-color .35s var(--ease)}
 .site-header.scrolled{background:var(--header-bg);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom-color:var(--border)}
+/* backdrop-filter would become the containing block for the fixed nav overlay — disable it while the menu is open */
+.site-header.menu-open{backdrop-filter:none;-webkit-backdrop-filter:none}
 .header-inner{display:flex;align-items:center;gap:28px;height:76px}
 .logo{font-family:var(--font-mono);font-size:1.08rem;font-weight:500;letter-spacing:-.02em;margin-right:auto}
 .logo span{color:var(--accent)}
@@ -124,7 +126,7 @@ main{position:relative;z-index:1}
 @keyframes blink{50%{opacity:0}}
 .hero-bio{color:var(--muted);font-size:1.06rem;max-width:660px;margin-bottom:38px}
 .hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:70px}
-.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:780px}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:920px}
 .stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;transition:transform .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease)}
 .stat:hover{transform:translateY(-4px);border-color:var(--accent);background:var(--surface-hover)}
 .stat-num{display:block;font-family:var(--font-head);font-size:clamp(1.7rem,3.4vw,2.3rem);font-weight:700;letter-spacing:-.02em;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -261,6 +263,7 @@ main{position:relative;z-index:1}
   .skills-grid{grid-template-columns:1fr}
   .skills-bars{position:static}
   .xp-stats{grid-template-columns:repeat(2,1fr)}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:768px){
   .section{padding:92px 0}
