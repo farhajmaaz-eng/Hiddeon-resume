@@ -5,19 +5,6 @@
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = matchMedia('(pointer: fine)').matches;
 
-  /* ---------- Theme toggle ----------  */ const themeToggle = $('#themeToggle');
-  const setThemeLabel = () => {
-    const light = document.documentElement.dataset.theme === 'light';
-    themeToggle.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
-  };
-  themeToggle.addEventListener('click', () => {
-    const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-    document.documentElement.dataset.theme = next;
-    try { localStorage.setItem('theme', next); } catch (e) {}
-    setThemeLabel();
-  });
-  setThemeLabel();
-
   /* ---------- Header state + scroll progress ----------  */ const header = $('#siteHeader');
   const progressFill = $('#progressFill');
   const onScroll = () => {
@@ -34,11 +21,13 @@
     nav.classList.remove('open');
     hamburger.setAttribute('aria-expanded', 'false');
     hamburger.setAttribute('aria-label', 'Open menu');
+    document.body.style.overflow = '';
   };
   hamburger.addEventListener('click', () => {
     const open = nav.classList.toggle('open');
     hamburger.setAttribute('aria-expanded', String(open));
     hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
   });
   $$('a', nav).forEach(a => a.addEventListener('click', closeMenu));
   addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
