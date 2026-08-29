@@ -1,112 +1,145 @@
-/* ============ NAV ============ */
-const navbar = document.getElementById('navbar');
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
+(() => {
+  'use strict';
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = matchMedia('(pointer: fine)').matches;
 
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 30);
-}, { passive: true });
-
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  navLinks.classList.toggle('open');
-});
-
-navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-  hamburger.classList.remove('open');
-  navLinks.classList.remove('open');
-}));
-
-/* Active link on scroll */
-const sections = document.querySelectorAll('section[id]');
-const linkMap = {};
-navLinks.querySelectorAll('a').forEach(a => linkMap[a.getAttribute('href').slice(1)] = a);
-
-const sectionObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting && linkMap[e.target.id]) {
-      navLinks.querySelectorAll('a').forEach(a => a.classList.remove('active'));
-      linkMap[e.target.id].classList.add('active');
-    }
+  /* ---------- Theme toggle ----------  */ const themeToggle = $('#themeToggle');
+  const setThemeLabel = () => {
+    const light = document.documentElement.dataset.theme === 'light';
+    themeToggle.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
+  };
+  themeToggle.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    setThemeLabel();
   });
-}, { rootMargin: '-40% 0px -55% 0px' });
-sections.forEach(s => sectionObserver.observe(s));
+  setThemeLabel();
 
-/* ============ TYPING EFFECT ============ */
-const typedEl = document.getElementById('typed');
-const phrases = [
-  'Roblox games in Luau.',
-  'clean, optimized scripts.',
-  'premium websites.',
-  'communities that scale.'
-];
-let phraseIdx = 0, charIdx = 0, deleting = false;
+  /* ---------- Header state + scroll progress ----------  */ const header = $('#siteHeader');
+  const progressFill = $('#progressFill');
+  const onScroll = () => {
+    header.classList.toggle('scrolled', scrollY > 24);
+    const max = document.documentElement.scrollHeight - innerHeight;
+    progressFill.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + '%';
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-function typeLoop() {
-  const current = phrases[phraseIdx];
-  typedEl.textContent = current.slice(0, charIdx);
-  let delay = deleting ? 35 : 75;
-  if (!deleting && charIdx === current.length) { delay = 1800; deleting = true; }
-  else if (deleting && charIdx === 0) { deleting = false; phraseIdx = (phraseIdx + 1) % phrases.length; delay = 400; }
-  charIdx += deleting ? -1 : 1;
-  setTimeout(typeLoop, delay);
-}
-typeLoop();
-
-/* ============ SCROLL REVEAL ============ */
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      revealObserver.unobserve(e.target);
-    }
+  /* ---------- Mobile menu ----------  */ const hamburger = $('#hamburger');
+  const nav = $('#siteNav');
+  const closeMenu = () => {
+    nav.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', 'Open menu');
+  };
+  hamburger.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', String(open));
+    hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  $$('a', nav).forEach(a => a.addEventListener('click', closeMenu));
+  addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+  matchMedia('(min-width: 769px)').addEventListener('change', closeMenu);
 
-/* ============ ANIMATED COUNTERS ============ */
-const counterObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    counterObserver.unobserve(e.target);
-    const el = e.target;
-    const target = parseInt(el.dataset.count, 10);
-    const suffix = el.dataset.suffix || '';
-    const duration = 1600;
-    const start = performance.now();
-    function tick(now) {
-      const p = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased) + suffix;
-      if (p < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('.stat-num[data-count]').forEach(el => counterObserver.observe(el));
-
-/* ============ COPY DISCORD ============ */
-const copyBtn = document.getElementById('copyDiscord');
-const discordTag = document.getElementById('discordTag');
-copyBtn.addEventListener('click', async () => {
-  try {
-    await navigator.clipboard.writeText(discordTag.textContent.trim());
-    copyBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
-    copyBtn.classList.add('copied');
-    setTimeout(() => {
-      copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i>';
-      copyBtn.classList.remove('copied');
-    }, 1800);
-  } catch (err) {
-    window.prompt('Copy my Discord username:', discordTag.textContent.trim());
+  /* ---------- Typing effect ----------  */ const typedEl = $('#typed');
+  const phrases = ['games players stick with.', 'systems that scale.', 'communities that thrive.', 'websites that convert.'];
+  if (typedEl && !reducedMotion) {
+    let pi = 0, ci = 0, deleting = false;
+    (function loop() {
+      const cur = phrases[pi];
+      typedEl.textContent = cur.slice(0, ci);
+      let delay = deleting ? 32 : 72;
+      if (!deleting && ci === cur.length) { delay = 2000; deleting = true; }
+      else if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; delay = 420; }
+      ci += deleting ? -1 : 1;
+      setTimeout(loop, delay);
+    })();
+  } else if (typedEl) {
+    typedEl.textContent = phrases[0];
   }
-});
 
-/* Clicking the Discord social button also copies */
-document.getElementById('socialDiscord').addEventListener('click', e => {
-  e.preventDefault();
-  copyBtn.click();
-});
+  /* ---------- Scroll reveal ----------  */ const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  $$('.reveal').forEach(el => revealObserver.observe(el));
 
-/* ============ YEAR ============ */
-document.getElementById('year').textContent = new Date().getFullYear();
+  /* ---------- Animated counters ----------  */ const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      counterObserver.unobserve(e.target);
+      const el = e.target, target = +el.dataset.count, suffix = el.dataset.suffix || '';
+      if (reducedMotion) { el.textContent = target + suffix; return; }
+      const t0 = performance.now(), dur = 1600;
+      (function tick(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+    });
+  }, { threshold: 0.5 });
+  $$('.stat-num[data-count]').forEach(el => counterObserver.observe(el));
+
+  /* ---------- Skill bars ----------  */ const skillsBar = $('.skills-bars');
+  if (skillsBar) {
+    const skillObserver = new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting) return;
+      skillObserver.disconnect();
+      $$('.skill-fill', skillsBar).forEach((f, i) => {
+        const lvl = f.dataset.level;
+        f.style.setProperty('--lvl', lvl + '%');
+        setTimeout(() => { f.style.width = lvl + '%'; }, reducedMotion ? 0 : i * 110);
+      });
+    }, { threshold: 0.3 });
+    skillObserver.observe(skillsBar);
+  }
+
+  /* ---------- Project cards: tilt + cursor spotlight ----------  */ if (finePointer && !reducedMotion) {
+    $$('.project-card').forEach(card => {
+      card.addEventListener('pointermove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        card.style.setProperty('--mx', (x * 100) + '%');
+        card.style.setProperty('--my', (y * 100) + '%');
+        card.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 5}deg) rotateY(${(x - 0.5) * 5}deg) translateY(-6px)`;
+      });
+      card.addEventListener('pointerleave', () => { card.style.transform = ''; });
+    });
+  }
+
+  /* ---------- Copy Discord username ----------  */ const copyBtn = $('#copyDiscord');
+  const tag = $('#discordTag').textContent.trim();
+  const doCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(tag);
+      copyBtn.classList.add('copied');
+      copyBtn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>';
+      setTimeout(() => {
+        copyBtn.classList.remove('copied');
+        copyBtn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>';
+      }, 1800);
+    } catch (err) {
+      prompt('Copy my Discord username:', tag);
+    }
+  };
+  copyBtn.addEventListener('click', doCopy);
+  $('#socialDiscord').addEventListener('click', doCopy);
+
+  /* ---------- Active nav link ----------  */ const navMap = {};
+  $$('a', nav).forEach(a => navMap[a.hash.slice(1)] = a);
+  const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && navMap[e.target.id]) {
+        $$('a', nav).forEach(a => a.classList.remove('active'));
+        navMap[e.target.id].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  $$('main section[id]').forEach(s => sectionObserver.observe(s));
+
+  /* ---------- Footer year ----------  */ $('#year').textContent = new Date().getFullYear();
+})();
