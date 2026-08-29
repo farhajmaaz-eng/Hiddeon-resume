@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hiddeon — Roblox Developer, Scripter & Community Manager</title>
+<meta name="description" content="Hiddeon — Roblox developer, Luau scripter, coder and website builder. Managed communities from 25K to 500K+ members and worked with 2M+ member networks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="bg-glow" aria-hidden="true"></div>
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<header class="nav" id="navbar">
+  <div class="container nav-inner">
+    <a href="#hero" class="logo">hiddeon<span>.dev</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="btn btn-sm btn-primary nav-cta">Hire Me</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <p class="hero-badge reveal"><i class="fa-solid fa-bolt"></i> Roblox Developer · Scripter · Web Builder</p>
+    <h1 class="reveal" style="--d:.05s">Hey, I'm <span class="gradient-text">Hiddeon</span></h1>
+    <p class="hero-typing reveal" style="--d:.1s">I build <span id="typed"></span><span class="type-cursor">|</span></p>
+    <p class="hero-bio reveal" style="--d:.15s">Roblox developer and Luau scripter with real community experience behind the code. I've managed servers of 25K, 78K and 189K+ members, worked with networks of 2M+, and owned a 500K+ member community myself — so I build games, tools and websites that actually scale.</p>
+    <div class="hero-cta reveal" style="--d:.2s">
+      <a href="#projects" class="btn btn-primary">View My Work <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+    </div>
+    <div class="hero-stats reveal" style="--d:.25s">
+      <div class="stat">
+        <span class="stat-num" data-count="500" data-suffix="K+">0</span>
+        <span class="stat-label">Members — community I owned &amp; ran</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-count="2" data-suffix="M+">0</span>
+        <span class="stat-label">Members — communities I've worked with</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-count="189" data-suffix="K+">0</span>
+        <span class="stat-label">Members — largest server managed</span>
+      </div>
+    </div>
+  </div>
+  <a href="#about" class="scroll-hint" aria-label="Scroll down"><i class="fa-solid fa-chevron-down"></i></a>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="container">
+    <p class="section-tag reveal">01 · About Me</p>
+    <h2 class="section-title reveal">Developer <span class="gradient-text">+</span> Community Guy</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="reveal">I'm Hiddeon — a Roblox developer, Luau scripter, coder, and website builder. I've spent years deep inside the Roblox ecosystem, and not just on the code side: I've moderated, managed and grown communities from a few thousand members to half a million.</p>
+        <p class="reveal" style="--d:.05s">That dual experience is what sets my work apart. When I build something for you, I'm not just shipping scripts — I understand player retention, staff workflows, exploit prevention, and what a growing community actually needs to stay healthy at scale.</p>
+        <ul class="about-facts reveal" style="--d:.1s">
+          <li><i class="fa-brands fa-discord"></i><span>Discord — <strong class="mono">hidd3on_</strong></span></li>
+          <li><i class="fa-solid fa-gamepad"></i><span>Focus — Roblox development &amp; community infrastructure</span></li>
+          <li><i class="fa-solid fa-users"></i><span>Communities managed — 25K → 500K+ members</span></li>
+          <li><i class="fa-solid fa-globe"></i><span>Also building — modern, responsive websites</span></li>
+        </ul>
+      </div>
+      <div class="code-card reveal" style="--d:.15s">
+        <div class="code-card-bar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="code-card-title">hiddeon.luau</span></div>
+        <pre><code><span class="c-kw">local</span> <span class="c-var">Player</span> = game.Players.LocalPlayer
+
+<span class="c-kw">local</span> <span class="c-var">stats</span> = {
+    scripting   = <span class="c-str">"Lua / Luau"</span>,
+    gameDev     = <span class="c-kw">true</span>,
+    webDev      = <span class="c-kw">true</span>,
+    communities = { <span class="c-str">"25K+"</span>, <span class="c-str">"78K+"</span>, <span class="c-str">"189K+"</span>, <span class="c-str">"500K+"</span> },
+}
+
+<span class="c-cm">-- always shipping</span>
+<span class="c-kw">task</span>.spawn(<span class="c-kw">function</span>()
+    <span class="c-kw">while</span> <span class="c-kw">true</span> <span class="c-kw">do</span>
+        Player:<span class="c-fn">BuildCoolThings</span>()
+        <span class="c-kw">task</span>.wait(<span class="c-num">0</span>)
+    <span class="c-kw">end</span>
+<span class="c-kw">end</span>)</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section class="section" id="skills">
+  <div class="container">
+    <p class="section-tag reveal">02 · Skills</p>
+    <h2 class="section-title reveal">What I Work With</h2>
+    <div class="skills-grid">
+      <div class="card skill-card reveal">
+        <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+        <h3>Roblox Scripting — Lua / Luau</h3>
+        <p>Custom gameplay systems written clean and optimized, built to survive real player loads.</p>
+        <div class="tags"><span>Gameplay systems</span><span>DataStores</span><span>Remotes &amp; security</span><span>Modules</span><span>UI scripting</span></div>
+      </div>
+      <div class="card skill-card reveal" style="--d:.05s">
+        <div class="card-icon"><i class="fa-solid fa-gamepad"></i></div>
+        <h3>Roblox Game Development</h3>
+        <p>From concept to live game — design, monetization, testing and long-term live-ops thinking.</p>
+        <div class="tags"><span>Game design</span><span>Monetization</span><span>Optimization</span><span>Live-ops</span><span>Testing</span></div>
+      </div>
+      <div class="card skill-card reveal" style="--d:.1s">
+        <div class="card-icon"><i class="fa-solid fa-terminal"></i></div>
+        <h3>Coding &amp; Development</h3>
+        <p>Developer-first mindset across languages — clean architecture, version control, maintainable code.</p>
+        <div class="tags"><span>JavaScript</span><span>HTML / CSS</span><span>Lua</span><span>Git</span><span>APIs</span></div>
+      </div>
+      <div class="card skill-card reveal">
+        <div class="card-icon"><i class="fa-solid fa-globe"></i></div>
+        <h3>Web Development</h3>
+        <p>Premium, responsive websites — dark UIs, smooth animation, fast load times, built to convert.</p>
+        <div class="tags"><span>Responsive design</span><span>Dark UI</span><span>Animations</span><span>Landing pages</span><span>Hosting</span></div>
+      </div>
+      <div class="card skill-card reveal" style="--d:.05s">
+        <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+        <h3>Server &amp; Community Management</h3>
+        <p>Years of running large Discord communities — staff teams, events, growth and day-to-day ops.</p>
+        <div class="tags"><span>Staff hiring &amp; training</span><span>Events</span><span>Growth strategy</span><span>Engagement</span></div>
+      </div>
+      <div class="card skill-card reveal" style="--d:.1s">
+        <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3>Moderation &amp; Security</h3>
+        <p>Anti-exploit thinking in code and in community — moderation pipelines that scale past 100K members.</p>
+        <div class="tags"><span>Anti-exploit</span><span>Auto-mod setup</span><span>Raid prevention</span><span>Policy design</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section class="section" id="experience">
+  <div class="container">
+    <p class="section-tag reveal">03 · Experience</p>
+    <h2 class="section-title reveal">Community Track Record</h2>
+    <div class="xp-stats">
+      <div class="card xp-stat reveal"><span class="stat-num">25K+</span><span class="stat-label">Member community managed</span></div>
+      <div class="card xp-stat reveal" style="--d:.05s"><span class="stat-num">78K+</span><span class="stat-label">Member community managed</span></div>
+      <div class="card xp-stat reveal" style="--d:.1s"><span class="stat-num">189K+</span><span class="stat-label">Member community managed</span></div>
+      <div class="card xp-stat reveal" style="--d:.15s"><span class="stat-num">500K+</span><span class="stat-label">Member community owned &amp; run</span></div>
+    </div>
+    <p class="xp-note reveal"><i class="fa-solid fa-star"></i> Worked directly with owners of Roblox communities &amp; servers reaching <strong>2M+ members</strong>.</p>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="card tl-card">
+          <span class="tl-tag">Community Manager</span>
+          <h3>Multiple Large Servers — 25K / 78K / 189K+ Members</h3>
+          <p>Managed and moderated Roblox-focused Discord communities at three major scales. Built and led mod teams, set up moderation pipelines and auto-mod tooling, ran events, and kept fast-moving servers safe, active and healthy.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal" style="--d:.05s">
+        <div class="tl-dot"></div>
+        <div class="card tl-card">
+          <span class="tl-tag">Network Collaborator</span>
+          <h3>Top-Tier Roblox Communities — 2M+ Member Networks</h3>
+          <p>Worked alongside owners of Roblox communities and servers exceeding 2M+ total members — contributing on development, staff operations and cross-server growth strategy at the highest level of the Roblox community space.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal" style="--d:.1s">
+        <div class="tl-dot"></div>
+        <div class="card tl-card">
+          <span class="tl-tag accent">Founder &amp; Owner</span>
+          <h3>Owned &amp; Operated — 500K+ Member Community</h3>
+          <p>Owned and ran a 500K+ member community end-to-end: hired and trained staff, designed systems and onboarding, managed explosive growth, and handled everything from moderation policy to community events at scale.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="section" id="projects">
+  <div class="container">
+    <p class="section-tag reveal">04 · Projects</p>
+    <h2 class="section-title reveal">Things I've Built &amp; Shipped</h2>
+    <div class="projects-grid">
+      <div class="card project-card reveal">
+        <div class="card-icon"><i class="fa-solid fa-cubes"></i></div>
+        <h3>Custom Roblox Game Systems</h3>
+        <p>Bespoke Luau systems built from scratch — combat, economies, inventories and progression — architected modularly with secure DataStore saving.</p>
+        <div class="tags"><span>Luau</span><span>DataStores</span><span>Modular</span></div>
+      </div>
+      <div class="card project-card reveal" style="--d:.05s">
+        <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3>Anti-Exploit &amp; Security Tooling</h3>
+        <p>Server-side validation, remote-event hardening and exploit detection baked into everything I ship — because big communities attract bad actors.</p>
+        <div class="tags"><span>Security</span><span>Server-side</span><span>Luau</span></div>
+      </div>
+      <div class="card project-card reveal" style="--d:.1s">
+        <div class="card-icon"><i class="fa-solid fa-window-maximize"></i></div>
+        <h3>Community Websites &amp; Portfolios</h3>
+        <p>Sleek, modern, fully responsive websites for communities and creators — dark UIs, smooth animation, built to turn visitors into members.</p>
+        <div class="tags"><span>HTML/CSS/JS</span><span>Responsive</span><span>Animated</span></div>
+      </div>
+      <div class="card project-card reveal" style="--d:.15s">
+        <div class="card-icon"><i class="fa-brands fa-discord"></i></div>
+        <h3>Discord Servers &amp; Automation</h3>
+        <p>Complete Discord setups: channel architecture, role systems, bots, auto-moderation and onboarding flows sized for communities of any scale.</p>
+        <div class="tags"><span>Discord</span><span>Bots</span><span>Automation</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="section" id="services">
+  <div class="container">
+    <p class="section-tag reveal">05 · Services</p>
+    <h2 class="section-title reveal">How I Can Help</h2>
+    <div class="projects-grid">
+      <div class="card project-card reveal">
+        <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+        <h3>Roblox Scripting &amp; Development</h3>
+        <p>Custom gameplay systems, tools and fixes for your game — clean Luau, optimized, and documented.</p>
+        <ul class="includes"><li><i class="fa-solid fa-check"></i> Custom systems &amp; features</li><li><i class="fa-solid fa-check"></i> Bug fixes &amp; optimization</li><li><i class="fa-solid fa-check"></i> Security hardening</li></ul>
+      </div>
+      <div class="card project-card reveal" style="--d:.05s">
+        <div class="card-icon"><i class="fa-solid fa-palette"></i></div>
+        <h3>Website Design &amp; Builds</h3>
+        <p>Premium dark-UI websites for games, communities and personal brands — designed and built end-to-end.</p>
+        <ul class="includes"><li><i class="fa-solid fa-check"></i> Custom design, no templates</li><li><i class="fa-solid fa-check"></i> Responsive &amp; animated</li><li><i class="fa-solid fa-check"></i> Launch &amp; hosting help</li></ul>
+      </div>
+      <div class="card project-card reveal" style="--d:.1s">
+        <div class="card-icon"><i class="fa-solid fa-users-gear"></i></div>
+        <h3>Community Setup &amp; Management</h3>
+        <p>Launch or level up your Discord community with structure that scales — from first channel to 100K+ members.</p>
+        <ul class="includes"><li><i class="fa-solid fa-check"></i> Server architecture &amp; setup</li><li><i class="fa-solid fa-check"></i> Staff team setup &amp; training</li><li><i class="fa-solid fa-check"></i> Growth &amp; engagement plans</li></ul>
+      </div>
+      <div class="card project-card reveal" style="--d:.15s">
+        <div class="card-icon"><i class="fa-solid fa-comments"></i></div>
+        <h3>Consulting</h3>
+        <p>Strategy for owners who want to grow the right way — retention, monetization and moderation at scale.</p>
+        <ul class="includes"><li><i class="fa-solid fa-check"></i> Community &amp; server audits</li><li><i class="fa-solid fa-check"></i> Development guidance</li><li><i class="fa-solid fa-check"></i> Scale &amp; growth strategy</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section" id="contact">
+  <div class="container contact-inner">
+    <p class="section-tag reveal">06 · Contact</p>
+    <h2 class="section-title reveal" style="margin-bottom:18px">Let's Build <span class="gradient-text">Something</span></h2>
+    <p class="contact-sub reveal">The fastest way to reach me is Discord — my DMs are open for commissions, collaborations and questions.</p>
+    <div class="discord-chip reveal" style="--d:.05s">
+      <i class="fa-brands fa-discord"></i>
+      <span class="mono" id="discordTag">hidd3on_</span>
+      <button id="copyDiscord" aria-label="Copy Discord username"><i class="fa-regular fa-copy"></i></button>
+    </div>
+    <div class="socials reveal" style="--d:.1s">
+      <!-- Replace the # hrefs below with your real profile URLs -->
+      <a href="#" class="social-btn" title="Discord: hidd3on_" id="socialDiscord"><i class="fa-brands fa-discord"></i></a>
+      <a href="#" class="social-btn" title="Roblox Profile"><i class="fa-solid fa-gamepad"></i></a>
+      <a href="#" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
+      <a href="#" class="social-btn" title="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="#" class="social-btn" title="Email"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <p>© <span id="year"></span> Hiddeon — Roblox Developer &amp; Community Manager</p>
+    <p class="mono footer-note">built with <span class="gradient-text">&lt;/&gt;</span> and too much caffeine</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
